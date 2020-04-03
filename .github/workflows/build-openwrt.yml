@@ -12,10 +12,10 @@ on:
   push:
     branches: 
       - master
-  #schedule:
-  #  - cron: 0 20 * * *
-  #release:
-  #  types: [published]
+  schedule:
+    - cron: 0 8 * * 6
+  release:
+    types: [published]
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -25,6 +25,7 @@ env:
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
+  UPLOAD_COWTRANSFER: true
   TZ: Asia/Shanghai
 
 jobs:
@@ -103,3 +104,9 @@ jobs:
       with:
         name: OpenWrt_firmware
         path: ${{ env.FIRMWARE }}
+
+    - name: Upload firmware to cowtransfer
+      if: env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
+      run: |
+        curl -sL https://git.io/cowtransfer | sh
+        ./cowtransfer-uploader -s -p 8 ${FIRMWARE}
