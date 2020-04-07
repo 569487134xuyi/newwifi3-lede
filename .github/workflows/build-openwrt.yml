@@ -11,9 +11,9 @@ name: Build OpenWrt
 on:
   push:
     branches: 
-      - master
+      - Lienol
   schedule:
-    - cron: 0 8 * * 6
+    - cron: 0 8 * * 7
   release:
     types: [published]
 
