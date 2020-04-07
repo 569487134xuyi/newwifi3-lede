@@ -12,10 +12,10 @@ on:
   push:
     branches: 
       - Lienol
-  schedule:
-    - cron: 0 8 * * 7
-  release:
-    types: [published]
+  #schedule:
+    #- cron: 0 8 * * 7
+  #release:
+    #types: [published]
 
 env:
   REPO_URL: https://github.com/Lienol/openwrt
